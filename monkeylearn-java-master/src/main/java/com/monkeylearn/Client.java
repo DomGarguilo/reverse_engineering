@@ -17,7 +17,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.json.simple.JSONObject;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.JLabel;
@@ -131,13 +130,13 @@ public class Client {
 		lblThisClassifierWill.setBounds(39, 78, 623, 33);
 		frame.getContentPane().add(lblThisClassifierWill);
 		
-		JLabel lblEnterTextBelow = new JLabel("Enter text below or upload a file to classify");
+		JLabel lblEnterTextBelow = new JLabel("Enter text below or upload a text file to classify");
 		lblEnterTextBelow.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblEnterTextBelow.setBounds(12, 145, 310, 26);
 		frame.getContentPane().add(lblEnterTextBelow);
 		
 		JButton btnUploadFile = new JButton("Upload File");
-		btnUploadFile.setBounds(311, 147, 97, 25);
+		btnUploadFile.setBounds(326, 147, 97, 25);
 		frame.getContentPane().add(btnUploadFile);
 		
 		
