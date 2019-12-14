@@ -3,12 +3,17 @@ package com.monkeylearn;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.json.simple.JSONObject;
 
@@ -16,17 +21,22 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.Font;
 
 public class Client {
 
-	private JFrame frame;
+	private JFrame frame, error, inputF;
 	private JTextField textField;
 	private JLabel lblEnter;
 	private JButton btnClassify;
 	private JPanel contentPane;
+	private JFileChooser openFile;
+	private File inputFile;
+	private Scanner reader;
+	private String inputFileString;
 
 	/**
 	 * Launch the application.
@@ -70,6 +80,18 @@ public class Client {
 		frame = new JFrame();
 		frame.setBounds(300, 300, 720, 720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		error = new JFrame();
+		error.setBounds(200,200,400,400);
+		error.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		inputF = new JFrame();
+		inputF.setBounds(300,300,500,500);
+		inputF.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		inputFileString = "";
+		
+		openFile = new JFileChooser();
 		
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(0, 0, 0));
@@ -117,6 +139,51 @@ public class Client {
 		JButton btnUploadFile = new JButton("Upload File");
 		btnUploadFile.setBounds(311, 147, 97, 25);
 		frame.getContentPane().add(btnUploadFile);
+		
+		
+		
+		btnUploadFile.addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+
+				FileNameExtensionFilter filter = new FileNameExtensionFilter(
+					    "TXT files", "txt");
+					openFile.setFileFilter(filter);
+					openFile.setCurrentDirectory(null);
+					int returnVal = openFile.showOpenDialog(inputF);
+					if(returnVal == JFileChooser.APPROVE_OPTION) {
+					   System.out.println("You chose to open this file: " +
+							   openFile.getSelectedFile().getName());
+					   inputFile = new File(openFile.getSelectedFile().getAbsolutePath());
+					   try {
+						reader = new Scanner(inputFile);
+						
+						while (reader.hasNext()) {
+							
+							inputFileString = inputFileString + reader.next() + " ";
+							
+						}
+						
+						textField.setText("");
+						textField.setText(inputFileString);
+						//System.out.println(inputFileString);
+						
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+					}
+			  
+				
+			}
+			});
+		
+		
 		
 		JLabel lblPrediction = new JLabel("Prediction:");
 		lblPrediction.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -176,6 +243,7 @@ public class Client {
 					//lblEnter.setText();
 				} catch (MonkeyLearnException e1) {
 					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(error, "You must input something", "Error", JOptionPane.ERROR_MESSAGE);
 					e1.printStackTrace();
 				}
 			  

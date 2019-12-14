@@ -5,8 +5,8 @@ import org.json.simple.JSONObject;
 
 public class Classifier {
 	
-	static MonkeyLearn ml = new MonkeyLearn("8bf492b5901fca78361b770aedac3cd4c3be9aa7");
-	static String modelId = "cl_JPyYCZYa";
+	static MonkeyLearn ml = new MonkeyLearn("1424eef742ffc2adca7641972ef4c0c6861feb99");
+	static String modelId = "cl_xzx6BXWL";
 
 	public static void main(String[] args) throws MonkeyLearnException {
 		
