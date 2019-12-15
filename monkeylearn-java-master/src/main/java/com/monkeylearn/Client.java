@@ -10,7 +10,6 @@ import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -24,11 +23,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.Font;
+import javax.swing.JTextArea;
 
 public class Client {
 
 	private JFrame frame, error, inputF;
-	private JTextField textField;
 	private JLabel lblEnter;
 	private JButton btnClassify;
 	private JPanel contentPane;
@@ -46,6 +45,7 @@ public class Client {
 	static JLabel lblPredInput = new JLabel("");
 	static JLabel lblProbInput = new JLabel("");
 	static JLabel lblConfInput = new JLabel("");
+	static JTextArea textArea = new JTextArea();
 	
 	public static void main(String[] args) throws MonkeyLearnException {
 		EventQueue.invokeLater(new Runnable() {
@@ -99,10 +99,6 @@ public class Client {
 		//setContentPane(contentPane);
 		contentPane.setLayout(null);
 		frame.getContentPane().setLayout(null);
-		
-		textField = new JTextField();
-		textField.setBounds(12,184,678,204);
-		frame.getContentPane().add(textField);
 		
 		JLabel lblNewLabel = new JLabel("Select Food");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -167,8 +163,10 @@ public class Client {
 							
 						}
 						
-						textField.setText("");
-						textField.setText(inputFileString);
+						//textField.setText("");
+						//textField.setText(inputFileString);
+						textArea.setText("");
+						textArea.setText(inputFileString);
 						//System.out.println(inputFileString);
 						
 					} catch (FileNotFoundException e1) {
@@ -224,6 +222,12 @@ public class Client {
 		lblCatInput.setBounds(536, 565, 126, 25);
 		frame.getContentPane().add(lblCatInput);
 		
+		
+		textArea.setBounds(12, 184, 678, 195);
+		frame.getContentPane().add(textArea);
+		textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+		
 		btnClassify.addActionListener(new ActionListener()
 		{
 
@@ -232,7 +236,8 @@ public class Client {
 				// TODO Auto-generated method stub
 				
 				String[] input = {""};
-				input[0] = textField.getText().toString();
+				//input[0] = textField.getText().toString();
+				input[0] = textArea.getText().toString();
 				try {
 					JSONObject json = classifier.getResult(input);
 					lblCatInput.setText(Long.toString((long)json.get("category_id")));
