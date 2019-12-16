@@ -1,26 +1,18 @@
 package com.monkeylearn;
 
-import com.monkeylearn.Settings;
 import com.monkeylearn.SleepRequests;
 import com.monkeylearn.Tuple;
 import com.monkeylearn.MonkeyLearnException;
 import com.monkeylearn.MonkeyLearnResponse;
 
 import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
-
 import org.apache.http.Header;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class Categories extends SleepRequests {
-    private String token;
     private String endpoint;
 
     public Categories(String token, String baseEndpoint, String userAgent) {
         super(token, userAgent);
-        this.token = token;
         this.endpoint = baseEndpoint + "classifiers/";
     }
 
@@ -37,7 +29,8 @@ public class Categories extends SleepRequests {
         return this.detail(module_id, category_id, true);
     }
 
-    public MonkeyLearnResponse create(String module_id, String name, int parent_id,
+    @SuppressWarnings("unchecked")
+	public MonkeyLearnResponse create(String module_id, String name, int parent_id,
                boolean sleepIfThrottled)
             throws MonkeyLearnException {
         JSONObject data = new JSONObject();
@@ -55,7 +48,8 @@ public class Categories extends SleepRequests {
         return this.create(module_id, name, parent_id, true);
     }
 
-    public MonkeyLearnResponse edit(String module_id, int category_id, String name, Integer parent_id,
+    @SuppressWarnings("unchecked")
+	public MonkeyLearnResponse edit(String module_id, int category_id, String name, Integer parent_id,
                boolean sleepIfThrottled)
             throws MonkeyLearnException {
         JSONObject data = new JSONObject();
@@ -84,7 +78,8 @@ public class Categories extends SleepRequests {
         return this.edit(module_id, category_id, name, parent_id, true);
     }
 
-    public MonkeyLearnResponse delete(String module_id, int category_id,
+    @SuppressWarnings("unchecked")
+	public MonkeyLearnResponse delete(String module_id, int category_id,
                 String samples_strategy, Integer samples_category_id,
                boolean sleepIfThrottled)
             throws MonkeyLearnException {

@@ -13,15 +13,12 @@ import org.json.simple.JSONArray;
 import org.apache.http.Header;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class Extraction extends SleepRequests {
-    private String token;
     private String endpoint;
 
     public Extraction(String token, String baseEndpoint, String userAgent) {
         super(token, userAgent);
-        this.token = token;
         this.endpoint = baseEndpoint + "extractors/";
     }
 

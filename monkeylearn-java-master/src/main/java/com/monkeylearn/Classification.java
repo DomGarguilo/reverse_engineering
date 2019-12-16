@@ -18,13 +18,11 @@ import java.util.List;
 
 public class Classification extends SleepRequests {
 
-    private String token;
     private String endpoint;
     public Categories categories;
 
     public Classification(String token, String baseEndpoint, String userAgent) {
         super(token, userAgent);
-        this.token = token;
         this.endpoint = baseEndpoint + "classifiers/";
         this.categories = new Categories(token, baseEndpoint, userAgent);
     }
